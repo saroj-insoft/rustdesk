@@ -1,7 +1,7 @@
 [Desktop Entry]
 Name=ez2Desk
-GenericName=Remote Desktop
-Comment=Remote Desktop
+GenericName=ez2Desk Remote Desktop
+Comment=ez2Desk Remote Desktop
 Exec=rustdesk %u
 Icon=rustdesk
 Terminal=false
