@@ -213,7 +213,7 @@ exclude = ["vdi/host", "examples/custom_plugin"]
 libxdo-sys = { path = "libs/libxdo-sys-stub" }
 
 [package.metadata.winres]
-LegalCopyright = "Copyright © 2025 Purslane Ltd. All rights reserved."
+LegalCopyright = "Copyright © 2025 Insoft Research and Development. All rights reserved."
 ProductName = "ez2Desk"
 FileDescription = "ez2Desk Remote Desktop"
 OriginalFilename = "rustdesk.exe"
