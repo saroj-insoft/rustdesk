@@ -46,9 +46,9 @@ fn main() {
         -k, --key=[KEY] ''
        -s, --server=[] 'Start server'",
     );
-    let matches = App::new("rustdesk")
+    let matches = App::new("ez2Desk")
         .version(crate::VERSION)
-        .author("Purslane Ltd<info@rustdesk.com>")
+        .author("Insoft Research and Development <info@ez2desk.com>")
         .about("RustDesk command line tool")
         .args_from_usage(&args)
         .get_matches();
