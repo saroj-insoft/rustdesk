@@ -53,12 +53,12 @@ class _TabInfo {
 enum SettingsTabKey {
   general,
   safety,
-  network,
+  // network,
   display,
   plugin,
-  account,
+  // account,
   printer,
-  about,
+  // about,
 }
 
 class DesktopSettingPage extends StatefulWidget {
@@ -70,17 +70,17 @@ class DesktopSettingPage extends StatefulWidget {
         !bind.isDisableSettings() &&
         bind.mainGetBuildinOption(key: kOptionHideSecuritySetting) != 'Y')
       SettingsTabKey.safety,
-    if (!bind.isDisableSettings() &&
-        bind.mainGetBuildinOption(key: kOptionHideNetworkSetting) != 'Y')
-      SettingsTabKey.network,
+    // if (!bind.isDisableSettings() &&
+    //     bind.mainGetBuildinOption(key: kOptionHideNetworkSetting) != 'Y')
+    //   SettingsTabKey.network,
     if (!bind.isIncomingOnly()) SettingsTabKey.display,
     if (!isWeb && !bind.isIncomingOnly() && bind.pluginFeatureIsEnabled())
       SettingsTabKey.plugin,
-    if (!bind.isDisableAccount()) SettingsTabKey.account,
+    // if (!bind.isDisableAccount()) SettingsTabKey.account,
     if (isWindows &&
         bind.mainGetBuildinOption(key: kOptionHideRemotePrinterSetting) != 'Y')
       SettingsTabKey.printer,
-    SettingsTabKey.about,
+    // SettingsTabKey.about,
   ];
 
   DesktopSettingPage({Key? key, required this.initialTabkey}) : super(key: key);
@@ -188,10 +188,10 @@ class _DesktopSettingPageState extends State<DesktopSettingPage>
           settingTabs.add(_TabInfo(tab, 'Security',
               Icons.enhanced_encryption_outlined, Icons.enhanced_encryption));
           break;
-        case SettingsTabKey.network:
-          settingTabs
-              .add(_TabInfo(tab, 'Network', Icons.link_outlined, Icons.link));
-          break;
+        // case SettingsTabKey.network:
+        //   settingTabs
+        //       .add(_TabInfo(tab, 'Network', Icons.link_outlined, Icons.link));
+        //   break;
         case SettingsTabKey.display:
           settingTabs.add(_TabInfo(tab, 'Display',
               Icons.desktop_windows_outlined, Icons.desktop_windows));
@@ -200,18 +200,18 @@ class _DesktopSettingPageState extends State<DesktopSettingPage>
           settingTabs.add(_TabInfo(
               tab, 'Plugin', Icons.extension_outlined, Icons.extension));
           break;
-        case SettingsTabKey.account:
-          settingTabs.add(
-              _TabInfo(tab, 'Account', Icons.person_outline, Icons.person));
-          break;
+        // case SettingsTabKey.account:
+        //   settingTabs.add(
+        //       _TabInfo(tab, 'Account', Icons.person_outline, Icons.person));
+        //   break;
         case SettingsTabKey.printer:
           settingTabs
               .add(_TabInfo(tab, 'Printer', Icons.print_outlined, Icons.print));
           break;
-        case SettingsTabKey.about:
-          settingTabs
-              .add(_TabInfo(tab, 'About', Icons.info_outline, Icons.info));
-          break;
+        // case SettingsTabKey.about:
+        //   settingTabs
+        //       .add(_TabInfo(tab, 'About', Icons.info_outline, Icons.info));
+        //   break;
       }
     }
     return settingTabs;
@@ -227,24 +227,24 @@ class _DesktopSettingPageState extends State<DesktopSettingPage>
         case SettingsTabKey.safety:
           children.add(const _Safety());
           break;
-        case SettingsTabKey.network:
-          children.add(const _Network());
-          break;
+        // case SettingsTabKey.network:
+        //   children.add(const _Network());
+        //   break;
         case SettingsTabKey.display:
           children.add(const _Display());
           break;
         case SettingsTabKey.plugin:
           children.add(const _Plugin());
           break;
-        case SettingsTabKey.account:
-          children.add(const _Account());
-          break;
+        // case SettingsTabKey.account:
+        //   children.add(const _Account());
+        //   break;
         case SettingsTabKey.printer:
           children.add(const _Printer());
           break;
-        case SettingsTabKey.about:
-          children.add(const _About());
-          break;
+        // case SettingsTabKey.about:
+        //   children.add(const _About());
+        //   break;
       }
     }
     return children;
@@ -2316,7 +2316,7 @@ class _AboutState extends State<_About> {
       final scrollController = ScrollController();
       return SingleChildScrollView(
         controller: scrollController,
-        child: _Card(title: translate('About RustDesk'), children: [
+        child: _Card(title: translate('About Ez2desk'), children: [
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -2335,7 +2335,7 @@ class _AboutState extends State<_About> {
                         .marginSymmetric(vertical: 4.0)),
               InkWell(
                   onTap: () {
-                    launchUrlString('https://rustdesk.com/privacy.html');
+                    launchUrlString('https://ez2desk.com/privacy.html');
                   },
                   child: Text(
                     translate('Privacy Statement'),
@@ -2343,7 +2343,7 @@ class _AboutState extends State<_About> {
                   ).marginSymmetric(vertical: 4.0)),
               InkWell(
                   onTap: () {
-                    launchUrlString('https://rustdesk.com');
+                    launchUrlString('https://ez2desk.com');
                   },
                   child: Text(
                     translate('Website'),

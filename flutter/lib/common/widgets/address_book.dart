@@ -104,7 +104,7 @@ class _AddressBookState extends State<AddressBook> {
                 ),
               ),
             ).marginOnly(right: 12.0)),
-        _buildPeersViews()
+        // _buildPeersViews()
       ],
     );
   }
@@ -136,7 +136,7 @@ class _AddressBookState extends State<AddressBook> {
                 ),
               ),
             ).marginOnly(bottom: 12.0)),
-        _buildPeersViews()
+        // _buildPeersViews()
       ],
     );
   }

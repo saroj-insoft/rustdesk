@@ -35,7 +35,7 @@ class SettingsPage extends StatefulWidget implements PageShape {
   State<SettingsPage> createState() => _SettingsState();
 }
 
-const url = 'https://rustdesk.com/';
+const url = 'https://ez2desk.com/';
 
 enum KeepScreenOn {
   never,
@@ -529,7 +529,7 @@ class _SettingsState extends State<SettingsPage> with WidgetsBindingObserver {
               title: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(translate('Keep RustDesk background service')),
+                    Text('Keep Ez2desk background service'),
                     Text('* ${translate('Ignore Battery Optimizations')}',
                         style: Theme.of(context).textTheme.bodySmall),
                   ]),
@@ -617,7 +617,7 @@ class _SettingsState extends State<SettingsPage> with WidgetsBindingObserver {
         onToggle: (bool v) async {
           await mainSetLocalBoolOption(kOptionEnableShowTerminalExtraKeys, v);
           final newValue =
-            mainGetLocalBoolOptionSync(kOptionEnableShowTerminalExtraKeys);
+              mainGetLocalBoolOptionSync(kOptionEnableShowTerminalExtraKeys);
           setState(() {
             _showTerminalExtraKeys = newValue;
           });
@@ -829,10 +829,12 @@ class _SettingsState extends State<SettingsPage> with WidgetsBindingObserver {
             ),
           if (!incomingOnly)
             SettingsTile.switchTile(
-              title: Text(translate('keep-awake-during-outgoing-sessions-label')),
+              title:
+                  Text(translate('keep-awake-during-outgoing-sessions-label')),
               initialValue: _preventSleepWhileConnected,
               onToggle: (v) async {
-                await mainSetLocalBoolOption(kOptionKeepAwakeDuringOutgoingSessions, v);
+                await mainSetLocalBoolOption(
+                    kOptionKeepAwakeDuringOutgoingSessions, v);
                 setState(() {
                   _preventSleepWhileConnected = v;
                 });
@@ -940,7 +942,7 @@ class _SettingsState extends State<SettingsPage> with WidgetsBindingObserver {
                 title: Text(translate("Version: ") + version),
                 value: Padding(
                   padding: EdgeInsets.symmetric(vertical: 8),
-                  child: Text('rustdesk.com',
+                  child: Text('ez2desk.com',
                       style: TextStyle(
                         decoration: TextDecoration.underline,
                       )),
@@ -965,7 +967,7 @@ class _SettingsState extends State<SettingsPage> with WidgetsBindingObserver {
             SettingsTile(
               title: Text(translate("Privacy Statement")),
               onPressed: (context) =>
-                  launchUrlString('https://rustdesk.com/privacy.html'),
+                  launchUrlString('https://ez2desk.com/privacy.html'),
               leading: Icon(Icons.privacy_tip),
             )
           ],
@@ -1073,17 +1075,17 @@ void showThemeSettings(OverlayDialogManager dialogManager) async {
 void showAbout(OverlayDialogManager dialogManager) {
   dialogManager.show((setState, close, context) {
     return CustomAlertDialog(
-      title: Text(translate('About RustDesk')),
+      title: Text(translate('About Ez2desk')),
       content: Wrap(direction: Axis.vertical, spacing: 12, children: [
         Text('Version: $version'),
         InkWell(
             onTap: () async {
-              const url = 'https://rustdesk.com/';
+              const url = 'https://ez2desk.com/';
               await launchUrl(Uri.parse(url));
             },
             child: Padding(
               padding: EdgeInsets.symmetric(vertical: 8),
-              child: Text('rustdesk.com',
+              child: Text('ez2desk.com',
                   style: TextStyle(
                     decoration: TextDecoration.underline,
                   )),

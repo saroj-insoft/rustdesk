@@ -41,7 +41,7 @@ class _OnlineStatusWidgetState extends State<OnlineStatusWidget> {
   double? get height => bind.isIncomingOnly() ? null : em * 3;
 
   void onUsePublicServerGuide() {
-    const url = "https://rustdesk.com/pricing";
+    const url = "https://ez2desk.com";
     canLaunchUrlString(url).then((can) {
       if (can) {
         launchUrlString(url);
@@ -72,7 +72,7 @@ class _OnlineStatusWidgetState extends State<OnlineStatusWidget> {
                   onTap: () async {
                     await start_service(true);
                   },
-                  child: Text(translate("Start service"),
+                  child: Text("Start service",
                       style: TextStyle(
                           decoration: TextDecoration.underline, fontSize: em)))
               .marginOnly(left: em),
@@ -94,7 +94,7 @@ class _OnlineStatusWidgetState extends State<OnlineStatusWidget> {
                       children: [
                         Flexible(
                           child: Text(
-                            translate('setup_server_tip'),
+                            'Welcome to ez2desk',
                             style: TextStyle(
                                 decoration: TextDecoration.underline,
                                 fontSize: em),
@@ -157,12 +157,12 @@ class _OnlineStatusWidgetState extends State<OnlineStatusWidget> {
     widget.onSvcStatusChanged?.call();
     return Text(
       _svcStopped.value
-          ? translate("Service is not running")
+          ? "Service is not running"
           : stateGlobal.svcStatus.value == SvcStatus.connecting
-              ? translate("connecting_status")
+              ? "connecting_status"
               : stateGlobal.svcStatus.value == SvcStatus.notReady
-                  ? translate("not_ready_status")
-                  : translate('Ready'),
+                  ? "not_ready_status"
+                  : 'Ready',
       style: TextStyle(fontSize: em),
     );
   }

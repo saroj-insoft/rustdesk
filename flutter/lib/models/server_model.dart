@@ -835,8 +835,17 @@ class Client {
 
   RxInt unreadChatMessageCount = 0.obs;
 
-  Client(this.id, this.authorized, this.isFileTransfer, this.isViewCamera,
-      this.name, this.peerId, this.keyboard, this.clipboard, this.audio);
+  Client(
+      this.id,
+      this.authorized,
+      this.isFileTransfer,
+      this.isViewCamera,
+      this.name,
+      this.peerId,
+      this.keyboard,
+      this.clipboard,
+      this.audio,
+      bool bool);
 
   Client.fromJson(Map<String, dynamic> json) {
     id = json['id'];
