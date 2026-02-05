@@ -85,7 +85,7 @@ def make_parser():
         "-m",
         "--manufacturer",
         type=str,
-        default="PURSLANE",
+        default="Insoft Research and Development",
         help="The app manufacturer.",
     )
     return parser
@@ -495,9 +495,9 @@ def update_license_file(app_name):
     license_file = Path(sys.argv[0]).parent.joinpath("Package/License.rtf")
     with open(license_file, "r", encoding="utf-8") as f:
         license_content = f.read()
-    license_content = license_content.replace("website rustdesk.com and other ", "")
-    license_content = license_content.replace("RustDesk", app_name)
-    license_content = re.sub("Purslane Ltd", app_name, license_content, flags=re.IGNORECASE)
+    license_content = license_content.replace("website ez2desk.com and other ", "")
+    license_content = license_content.replace("ez2Desk", app_name)
+    license_content = re.sub("Insoft Research and Development", app_name, license_content, flags=re.IGNORECASE)
     with open(license_file, "w", encoding="utf-8") as f:
         f.write(license_content)
 
