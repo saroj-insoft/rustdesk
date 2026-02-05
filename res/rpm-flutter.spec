@@ -34,11 +34,8 @@ install -Dm 644 $HBB/res/scalable.svg "%{buildroot}/usr/share/icons/hicolor/scal
 
 %files
 /usr/share/ez2desk/*
-/usr/share/ez2desk/files/rustdesk.service
 /usr/share/icons/hicolor/256x256/apps/rustdesk.png
 /usr/share/icons/hicolor/scalable/apps/rustdesk.svg
-/usr/share/ez2desk/files/rustdesk.desktop
-/usr/share/ez2desk/files/rustdesk-link.desktop
 
 %changelog
 # let's skip this for now
