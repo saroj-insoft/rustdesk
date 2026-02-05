@@ -752,7 +752,7 @@ jobs:
           create-dmg --icon "ez2Desk.app" 200 190 --hide-extension "ez2Desk.app" --window-size 800 400 --app-drop-link 600 185 ez2desk-${{ env.VERSION }}.dmg ./flutter/build/macos/Build/Products/Release/ez2Desk.app
           codesign --force --options runtime -s ${{ secrets.MACOS_CODESIGN_IDENTITY }} --deep --strict ez2desk-${{ env.VERSION }}.dmg -vvv
           # notarize the ez2desk-${{ env.VERSION }}.dmg
-          rcodesign notary-submit --api-key-path ${{ github.workspace }}/rustdesk.json  --staple ez2desk-${{ env.VERSION }}.dmg
+          rcodesign notary-submit --api-key-path ${{ github.workspace }}/ez2desk.json  --staple ez2desk-${{ env.VERSION }}.dmg
 
       - name: Rename rustdesk
         if: env.UPLOAD_ARTIFACT == 'true'
