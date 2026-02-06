@@ -330,11 +330,12 @@ def build_flutter_deb(version, features):
     system2('mkdir -p tmpdeb/usr/share/icons/hicolor/scalable/apps/')
     system2('mkdir -p tmpdeb/usr/share/applications/')
     system2('mkdir -p tmpdeb/usr/share/polkit-1/actions')
-    system2('rm tmpdeb/usr/bin/rustdesk || true')
+    system2('rm tmpdeb/usr/bin/ez2desk tmpdeb/usr/bin/rustdesk || true')
     system2(
         f'cp -r {flutter_build_dir}/* tmpdeb/usr/share/ez2desk/')
+    system2('if [ -f tmpdeb/usr/share/ez2desk/rustdesk ]; then mv tmpdeb/usr/share/ez2desk/rustdesk tmpdeb/usr/share/ez2desk/ez2desk; fi')
     system2(
-        'cp ../res/rustdesk.service tmpdeb/usr/share/ez2desk/files/systemd/')
+        'cp ../res/ez2desk.service tmpdeb/usr/share/ez2desk/files/systemd/')
     system2(
         'cp ../res/128x128@2x.png tmpdeb/usr/share/icons/hicolor/256x256/apps/rustdesk.png')
     system2(
@@ -373,11 +374,12 @@ def build_deb_from_folder(version, binary_folder):
     system2('mkdir -p tmpdeb/usr/share/icons/hicolor/scalable/apps/')
     system2('mkdir -p tmpdeb/usr/share/applications/')
     system2('mkdir -p tmpdeb/usr/share/polkit-1/actions')
-    system2('rm tmpdeb/usr/bin/rustdesk || true')
+    system2('rm tmpdeb/usr/bin/ez2desk tmpdeb/usr/bin/rustdesk || true')
     system2(
         f'cp -r ../{binary_folder}/* tmpdeb/usr/share/ez2desk/')
+    system2('if [ -f tmpdeb/usr/share/ez2desk/rustdesk ]; then mv tmpdeb/usr/share/ez2desk/rustdesk tmpdeb/usr/share/ez2desk/ez2desk; fi')
     system2(
-        'cp ../res/rustdesk.service tmpdeb/usr/share/ez2desk/files/systemd/')
+        'cp ../res/ez2desk.service tmpdeb/usr/share/ez2desk/files/systemd/')
     system2(
         'cp ../res/128x128@2x.png tmpdeb/usr/share/icons/hicolor/256x256/apps/rustdesk.png')
     system2(
@@ -602,11 +604,11 @@ def main():
                 system2(
                     'mv target/release/bundle/deb/rustdesk*.deb ./ez2desk.deb')
                 system2('dpkg-deb -R ez2desk.deb tmpdeb')
-                system2('mkdir -p tmpdeb/usr/share/rustdesk/files/systemd/')
+                system2('mkdir -p tmpdeb/usr/share/ez2desk/files/systemd/')
                 system2('mkdir -p tmpdeb/usr/share/icons/hicolor/256x256/apps/')
                 system2('mkdir -p tmpdeb/usr/share/icons/hicolor/scalable/apps/')
                 system2(
-                    'cp res/rustdesk.service tmpdeb/usr/share/rustdesk/files/systemd/')
+                    'cp res/ez2desk.service tmpdeb/usr/share/ez2desk/files/systemd/')
                 system2(
                     'cp res/128x128@2x.png tmpdeb/usr/share/icons/hicolor/256x256/apps/rustdesk.png')
                 system2(
@@ -623,9 +625,9 @@ def main():
                 os.system('mkdir -p tmpdeb/etc/pam.d/')
                 os.system('cp pam.d/rustdesk.debian tmpdeb/etc/pam.d/rustdesk')
                 system2('strip tmpdeb/usr/bin/rustdesk')
-                system2('mkdir -p tmpdeb/usr/share/rustdesk')
-                system2('mv tmpdeb/usr/bin/rustdesk tmpdeb/usr/share/rustdesk/')
-                system2('cp libsciter-gtk.so tmpdeb/usr/share/rustdesk/')
+                system2('mkdir -p tmpdeb/usr/share/ez2desk')
+                system2('mv tmpdeb/usr/bin/rustdesk tmpdeb/usr/share/ez2desk/ez2desk')
+                system2('cp libsciter-gtk.so tmpdeb/usr/share/ez2desk/')
                 md5_file_folder("tmpdeb/")
                 system2('dpkg-deb -b tmpdeb ez2desk.deb; /bin/rm -rf tmpdeb/')
                 os.rename('ez2desk.deb', 'ez2desk-%s.deb' % version)

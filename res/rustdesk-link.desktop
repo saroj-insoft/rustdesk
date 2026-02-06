@@ -2,8 +2,8 @@
 Name=ez2Desk
 NoDisplay=true
 MimeType=x-scheme-handler/rustdesk;
-TryExec=rustdesk
-Exec=rustdesk %u
+TryExec=ez2desk
+Exec=ez2desk %u
 Icon=rustdesk
 Terminal=false
 Type=Application

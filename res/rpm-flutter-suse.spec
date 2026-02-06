@@ -26,7 +26,9 @@ The best open-source remote desktop client software, written in Rust.
 
 mkdir -p "%{buildroot}/usr/share/ez2desk" && cp -r ${HBB}/flutter/build/linux/x64/release/bundle/* -t "%{buildroot}/usr/share/ez2desk"
 mkdir -p "%{buildroot}/usr/bin"
-install -Dm 644 $HBB/res/rustdesk.service -t "%{buildroot}/usr/share/ez2desk/files"
+if [ -f "%{buildroot}/usr/share/ez2desk/rustdesk" ]; then mv "%{buildroot}/usr/share/ez2desk/rustdesk" "%{buildroot}/usr/share/ez2desk/ez2desk"; fi
+ln -sf /usr/share/ez2desk/ez2desk "%{buildroot}/usr/bin/ez2desk"
+install -Dm 644 $HBB/res/ez2desk.service -t "%{buildroot}/usr/share/ez2desk/files"
 install -Dm 644 $HBB/res/rustdesk.desktop -t "%{buildroot}/usr/share/ez2desk/files"
 install -Dm 644 $HBB/res/rustdesk-link.desktop -t "%{buildroot}/usr/share/ez2desk/files"
 install -Dm 644 $HBB/res/128x128@2x.png "%{buildroot}/usr/share/icons/hicolor/256x256/apps/rustdesk.png"
@@ -34,6 +36,7 @@ install -Dm 644 $HBB/res/scalable.svg "%{buildroot}/usr/share/icons/hicolor/scal
 
 %files
 /usr/share/ez2desk/*
+/usr/bin/ez2desk
 /usr/share/icons/hicolor/256x256/apps/rustdesk.png
 /usr/share/icons/hicolor/scalable/apps/rustdesk.svg
 
@@ -48,26 +51,32 @@ case "$1" in
   ;;
   2)
     # for upgrade
+    systemctl stop ez2desk || true
     systemctl stop rustdesk || true
   ;;
 esac
 
 %post
-cp /usr/share/ez2desk/files/rustdesk.service /etc/systemd/system/rustdesk.service
+cp /usr/share/ez2desk/files/ez2desk.service /etc/systemd/system/ez2desk.service
+rm -f /etc/systemd/system/rustdesk.service || true
 cp /usr/share/ez2desk/files/rustdesk.desktop /usr/share/applications/
 cp /usr/share/ez2desk/files/rustdesk-link.desktop /usr/share/applications/
-ln -sf /usr/share/ez2desk/rustdesk /usr/bin/rustdesk
+ln -sf /usr/share/ez2desk/ez2desk /usr/bin/ez2desk
+rm -f /usr/bin/rustdesk || true
 systemctl daemon-reload
-systemctl enable rustdesk
-systemctl start rustdesk
+systemctl enable ez2desk
+systemctl start ez2desk
 update-desktop-database
 
 %preun
 case "$1" in
   0)
     # for uninstall
+    systemctl stop ez2desk || true
+    systemctl disable ez2desk || true
     systemctl stop rustdesk || true
     systemctl disable rustdesk || true
+    rm /etc/systemd/system/ez2desk.service || true
     rm /etc/systemd/system/rustdesk.service || true
   ;;
   1)
@@ -79,7 +88,7 @@ esac
 case "$1" in
   0)
     # for uninstall
-    rm /usr/bin/rustdesk || true
+    rm /usr/bin/ez2desk || true
     rmdir /usr/lib/rustdesk || true
     rmdir /usr/local/rustdesk || true
     rmdir /usr/share/ez2desk || true

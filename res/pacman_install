@@ -5,37 +5,41 @@
 # arg 1:  the new package version
 post_install() {
 	# do something here
-	cp /usr/share/rustdesk/files/rustdesk.service /etc/systemd/system/rustdesk.service
-	cp /usr/share/rustdesk/files/rustdesk.desktop /usr/share/applications/
-	cp /usr/share/rustdesk/files/rustdesk-link.desktop /usr/share/applications/
+	cp /usr/share/ez2desk/files/ez2desk.service /etc/systemd/system/ez2desk.service
+	cp /usr/share/ez2desk/files/rustdesk.desktop /usr/share/applications/
+	cp /usr/share/ez2desk/files/rustdesk-link.desktop /usr/share/applications/
 	systemctl daemon-reload
-	systemctl enable rustdesk
-	systemctl start rustdesk
+	systemctl enable ez2desk
+	systemctl start ez2desk
 	update-desktop-database
 }
 
 # arg 1:  the new package version
 # arg 2:  the old package version
 pre_upgrade() {
-    systemctl stop rustdesk || true
+	systemctl stop ez2desk || true
+	systemctl stop rustdesk || true
 }
 
 # arg 1:  the new package version
 # arg 2:  the old package version
 post_upgrade() {
-	cp /usr/share/rustdesk/files/rustdesk.service /etc/systemd/system/rustdesk.service
-	cp /usr/share/rustdesk/files/rustdesk.desktop /usr/share/applications/
-	cp /usr/share/rustdesk/files/rustdesk-link.desktop /usr/share/applications/
+	cp /usr/share/ez2desk/files/ez2desk.service /etc/systemd/system/ez2desk.service
+	cp /usr/share/ez2desk/files/rustdesk.desktop /usr/share/applications/
+	cp /usr/share/ez2desk/files/rustdesk-link.desktop /usr/share/applications/
 	systemctl daemon-reload
-	systemctl enable rustdesk
-	systemctl start rustdesk
+	systemctl enable ez2desk
+	systemctl start ez2desk
 	update-desktop-database
 }
 
 # arg 1:  the old package version
 pre_remove() {
+	systemctl stop ez2desk || true
+	systemctl disable ez2desk || true
 	systemctl stop rustdesk || true
 	systemctl disable rustdesk || true
+	rm /etc/systemd/system/ez2desk.service || true
 	rm /etc/systemd/system/rustdesk.service || true
 }
 

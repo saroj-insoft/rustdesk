@@ -24,10 +24,13 @@ md5sums=() #generate with 'makepkg -g'
 package() {
   if [[ ${FLUTTER} ]]; then
 	  mkdir -p "${pkgdir}/usr/share/ez2desk" && cp -r ${HBB}/flutter/build/linux/x64/release/bundle/* -t "${pkgdir}/usr/share/ez2desk"
+    if [[ -f "${pkgdir}/usr/share/ez2desk/rustdesk" ]]; then
+      mv "${pkgdir}/usr/share/ez2desk/rustdesk" "${pkgdir}/usr/share/ez2desk/ez2desk"
+    fi
   fi
   mkdir -p "${pkgdir}/usr/bin"
-  pushd ${pkgdir} && ln -s /usr/share/ez2desk/rustdesk usr/bin/rustdesk && popd
-  install -Dm 644 $HBB/res/rustdesk.service -t "${pkgdir}/usr/share/ez2desk/files"
+  pushd ${pkgdir} && ln -s /usr/share/ez2desk/ez2desk usr/bin/ez2desk && popd
+  install -Dm 644 $HBB/res/ez2desk.service -t "${pkgdir}/usr/share/ez2desk/files"
   install -Dm 644 $HBB/res/rustdesk.desktop -t "${pkgdir}/usr/share/ez2desk/files"
   install -Dm 644 $HBB/res/rustdesk-link.desktop -t "${pkgdir}/usr/share/ez2desk/files"
   install -Dm 644 $HBB/res/128x128@2x.png "${pkgdir}/usr/share/icons/hicolor/256x256/apps/rustdesk.png"
